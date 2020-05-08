@@ -119,7 +119,8 @@ def get_forecast(settings):
                 continue
             
             weather_type = day_forecast[timeslot]["W"]
-            forecasts_in_day.append((time_string, weather_type))
+            temperature = day_forecast[timeslot]["T"]
+            forecasts_in_day.append((time_string, weather_type, temperature))
 
         day_string = "";
         if day == 0:
@@ -140,11 +141,13 @@ def get_forecast_string(forecast=None):
         forecast_string += day_string
         forecast_string += ": "
         for forecast_in_day in forecasts_in_day:
-            time_string, weather_type = forecast_in_day
+            time_string, weather_type, temperature = forecast_in_day
             forecast_string += time_string
             forecast_string += " "
             forecast_string += WEATHER_TYPE_MAP[weather_type]
             forecast_string += " "
+            forecast_string += temperature
+            forecast_string += "C   "
         forecast_string += "  "
 
     forecast_string += "   "
